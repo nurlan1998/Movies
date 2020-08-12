@@ -10,7 +10,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import com.example.movies.R
-import com.example.movies.data.model.DataMovies
+import com.example.movies.data.model.MovieVoteAverage
+import com.example.movies.data.model.PopularMovies
 import com.example.movies.network.ApiInterFace
 import com.example.movies.network.RetrofitInstance
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -41,7 +42,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun showData() {
-        val responceLiveData: LiveData<Response<DataMovies>> = liveData {
+        val responceLiveData: LiveData<Response<MovieVoteAverage>> = liveData {
             val responce = retrofitService.getMovies()
             emit(responce)
         }

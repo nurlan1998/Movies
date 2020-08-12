@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.movies.R
-import com.example.movies.data.model.Result
+import com.example.movies.data.model.MoviesVoteResult
+import com.example.movies.data.model.PopularMoviesResult
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var models: List<Result> = listOf()
+    var models: List<MoviesVoteResult> = listOf()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -34,7 +35,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     }
 
     inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun populate(dataMovie: Result){
+        fun populate(dataMovie: MoviesVoteResult){
             itemView.tvTitle.text = dataMovie.title
 
             Glide.with(itemView)
