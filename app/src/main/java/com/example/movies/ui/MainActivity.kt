@@ -1,7 +1,8 @@
-package com.example.movies
+package com.example.movies.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.movies.R
 import com.example.movies.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
@@ -9,7 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_container,
             HomeFragment()
         ).commit()
 

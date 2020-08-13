@@ -9,7 +9,7 @@ data class MoviesVoteResult(
     @SerializedName("backdrop_path")
     val backdropPath: String,
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("original_language")
     val originalLanguage: String,
     @SerializedName("original_title")
