@@ -1,6 +1,7 @@
 package com.example.movies.ui.home
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,7 @@ import com.example.movies.R
 import com.example.movies.data.model.MoviesVoteResult
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class HomeAdapter: PagedListAdapter<MoviesVoteResult,HomeAdapter.HomeViewHolder>(USER_COMPARATOR) {
-//
-//    var models: List<MoviesVoteResult> = listOf()
-//    set(value) {
-//        field = value
-//        notifyDataSetChanged()
-//    }
-
-    //"https://image.tmdb.org/t/p/w342
+class HomeAdapter(): PagedListAdapter<MoviesVoteResult,HomeAdapter.HomeViewHolder>(USER_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item,parent,false)
@@ -29,8 +22,10 @@ class HomeAdapter: PagedListAdapter<MoviesVoteResult,HomeAdapter.HomeViewHolder>
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-            val movie =getItem(position)
-            movie?.let { holder.populate(movie) }
+            val movie = getItem(position)
+            movie?.let {
+                holder.populate(movie)
+            }
     }
 
     inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -41,7 +36,19 @@ class HomeAdapter: PagedListAdapter<MoviesVoteResult,HomeAdapter.HomeViewHolder>
                 .load("https://image.tmdb.org/t/p/w342${dataMovie.posterPath}")
                 .transform(CenterCrop())
                 .into(itemView.ivMovie)
+            itemView.setOnClickListener {
+                onItemClickCallBack?.onItemClicked(dataMovie.id)
+            }
         }
+    }
+
+    private var onItemClickCallBack: OnItemClickCallBack? = null
+
+    interface OnItemClickCallBack{
+        fun onItemClicked(id: Int?)
+    }
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack){
+        this.onItemClickCallBack = onItemClickCallBack
     }
     companion object{
         private val USER_COMPARATOR = object : DiffUtil.ItemCallback<MoviesVoteResult>(){

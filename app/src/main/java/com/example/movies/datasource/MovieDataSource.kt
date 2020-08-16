@@ -14,7 +14,6 @@ import retrofit2.Response
 class MovieDataSource : PageKeyedDataSource<Int,MoviesVoteResult>() {
 
     lateinit var retrofitService: ApiInterFace
-    private val adapter = HomeAdapter()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
