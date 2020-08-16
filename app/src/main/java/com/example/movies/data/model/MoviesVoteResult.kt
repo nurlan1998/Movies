@@ -3,13 +3,13 @@ package com.example.movies.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class MoviesVoteResult(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String,
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("original_language")
     val originalLanguage: String,
     @SerializedName("original_title")
