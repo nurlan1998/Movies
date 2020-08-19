@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_popular"
+        android:id="@+id/popularFragment"
         android:title="@string/title_popular" />
 
     <item
-        android:id="@+id/navigation_rating"
+        android:id="@+id/topRatedFragment"
         android:icon="@drawable/top_rating"
         android:title="@string/title_rating" />
 </menu>

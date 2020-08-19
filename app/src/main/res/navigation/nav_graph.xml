@@ -9,30 +9,15 @@
         android:id="@+id/homeFragment"
         android:name="com.example.movies.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_popularFragment"
-            app:destination="@id/popularFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/popularFragment"
         android:name="com.example.movies.ui.popular.PopularFragment"
         android:label="fragment_popular"
-        tools:layout="@layout/fragment_popular" >
-        <action
-            android:id="@+id/action_popularFragment_to_topRatedFragment"
-            app:destination="@id/topRatedFragment" />
-        <action
-            android:id="@+id/action_popularFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_popular" />
     <fragment
         android:id="@+id/topRatedFragment"
         android:name="com.example.movies.ui.toprated.TopRatedFragment"
         android:label="fragment_top_rated"
-        tools:layout="@layout/fragment_top_rated" >
-        <action
-            android:id="@+id/action_topRatedFragment_to_popularFragment"
-            app:destination="@id/popularFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_top_rated" />
 </navigation>

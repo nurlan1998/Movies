@@ -17,4 +17,7 @@ interface ApiInterFace {
 
     @GET("3/movie/{movie_id}?api_key=7d6c3c25fa66a886b27c1c4437b07c16&language=ru-RU")
     fun getDetailMovies(@Path("movie_id") id: Int) : Call<DetailMovies>
+
+    @GET("3/movie/popular?api_key=7d6c3c25fa66a886b27c1c4437b07c16&language=ru-RU&page=1")
+    fun getPopularMovies() : Call<MovieVoteAverage>
 }

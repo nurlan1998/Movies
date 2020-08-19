@@ -33,7 +33,7 @@ class HomeAdapter(): PagedListAdapter<MoviesVoteResult,HomeAdapter.HomeViewHolde
             itemView.tvTitle.text = dataMovie.title
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w342${dataMovie.posterPath}")
+                .load("https://image.tmdb.org/t/p/original${dataMovie.posterPath}")
                 .transform(CenterCrop())
                 .into(itemView.ivMovie)
             itemView.setOnClickListener {

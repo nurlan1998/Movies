@@ -47,7 +47,7 @@ class DetailActivity : AppCompatActivity() {
         tvReleaseDate.text = detail.releaseDate
         tvDetailOverView.text = detail.overview
 
-        Glide.with(this).load("https://image.tmdb.org/t/p/w342${detail.posterPath}")
+        Glide.with(this).load("https://image.tmdb.org/t/p/original${detail.posterPath}")
             .into(ivDetailMovie)
     }
 }
