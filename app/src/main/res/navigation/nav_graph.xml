@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.movies.ui.home.HomeFragment"
+        android:name="com.example.movies.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/popularFragment"
-        android:name="com.example.movies.ui.popular.PopularFragment"
+        android:name="com.example.movies.ui.PopularFragment"
         android:label="fragment_popular"
         tools:layout="@layout/fragment_popular" />
     <fragment
         android:id="@+id/topRatedFragment"
-        android:name="com.example.movies.ui.toprated.TopRatedFragment"
+        android:name="com.example.movies.ui.UpcomingFragment"
         android:label="fragment_top_rated"
-        tools:layout="@layout/fragment_top_rated" />
+        tools:layout="@layout/fragment_upcoming" />
 </navigation>

@@ -4,11 +4,10 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import com.example.movies.utils.Constants.Companion.BASE_URL
 
 class RetrofitInstance {
-    companion object{
-        private const val BASE_URL = "https://api.themoviedb.org/"
+    companion object {
 
         val interceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
