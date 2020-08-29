@@ -3,11 +3,11 @@ package com.example.movies.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TopRated(
+data class DataMovies(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val results: List<TopRatedResult>,
+    val results: List<DataMoviesResult>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
