@@ -46,6 +46,8 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
             })
     }
 
+
+
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, DataMoviesResult>) {
 
         retrofitService.getMovies(sort_criteria, API_KEY, LANGUAGE, params.key)
@@ -111,5 +113,6 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
         const val PAGE_SIZE = 20
         const val FIRST_PAGE = 1
     }
+
 
 }

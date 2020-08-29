@@ -14,4 +14,8 @@
         android:id="@+id/topRatedFragment"
         android:icon="@drawable/top_rating"
         android:title="@string/title_rating" />
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/top_rating"
+        android:title="@string/title_rating" />
 </menu>
