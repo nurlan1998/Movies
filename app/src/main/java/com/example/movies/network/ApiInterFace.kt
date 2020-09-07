@@ -2,8 +2,8 @@ package com.example.movies.network
 
 import com.example.movies.data.model.DetailMovies
 import com.example.movies.data.model.DataMovies
-import com.example.movies.utils.Constants.Companion.API_KEY
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -20,12 +20,16 @@ interface ApiInterFace {
     ): Call<DataMovies>
 
     @GET("3/movie/{movie_id}")
-    fun getDetailMovies(
+    suspend fun getDetailMovies(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String,
         @Query("language") language: String
-    ): Call<DetailMovies>
+    ): Response<DetailMovies>
 
     @GET("3/search/movie?api_key=7d6c3c25fa66a886b27c1c4437b07c16&language=en-US&page=1&include_adult=false")
-    fun getSearchMovies(@Query("query")query: String) : Call<DataMovies>
+    suspend fun getSearchMovies(
+        @Query("query") query: String,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Response<DataMovies>
 }

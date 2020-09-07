@@ -14,16 +14,12 @@ import retrofit2.Response
 
 class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, DataMoviesResult>() {
 
-    lateinit var retrofitService: ApiInterFace
-
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, DataMoviesResult>
     ) {
 
-        retrofitService = RetrofitInstance.getRetrofitInstance().create(ApiInterFace::class.java)
-
-        retrofitService.getMovies(sort_criteria, API_KEY, LANGUAGE, FIRST_PAGE)
+        RetrofitInstance.api.getMovies(sort_criteria, API_KEY, LANGUAGE, FIRST_PAGE)
             .enqueue(object : Callback<DataMovies> {
                 override fun onFailure(call: Call<DataMovies>, t: Throwable) {
                     Log.e("Repository", "onFailure", t)
@@ -33,7 +29,6 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
                     if (response.isSuccessful) {
                         val apiResponse = response.body()
                         if (apiResponse != null) {
-//                        adapter.models = responseBody.results
                             val responseItems = apiResponse.results
                             responseItems.let {
                                 callback.onResult(responseItems, null, FIRST_PAGE + 1)
@@ -47,10 +42,9 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
     }
 
 
-
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, DataMoviesResult>) {
 
-        retrofitService.getMovies(sort_criteria, API_KEY, LANGUAGE, params.key)
+        RetrofitInstance.api.getMovies(sort_criteria, API_KEY, LANGUAGE, params.key)
             .enqueue(object : Callback<DataMovies> {
                 override fun onFailure(call: Call<DataMovies>, t: Throwable) {
                     Log.e("Repository", "onFailure", t)
@@ -60,7 +54,6 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
                     if (response.isSuccessful) {
                         val apiResponse = response.body()
                         if (apiResponse != null) {
-//                        adapter.models = responseBody.results
                             val responseItems = apiResponse.results
 
                             val key = params.key + 1
@@ -82,7 +75,7 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
     ) {
 
 
-        retrofitService.getMovies(sort_criteria, API_KEY, LANGUAGE, FIRST_PAGE)
+        RetrofitInstance.api.getMovies(sort_criteria, API_KEY, LANGUAGE, FIRST_PAGE)
             .enqueue(object : Callback<DataMovies> {
                 override fun onFailure(call: Call<DataMovies>, t: Throwable) {
                     Log.e("Repository", "onFailure", t)
@@ -92,7 +85,6 @@ class MovieDataSource(var sort_criteria: String) : PageKeyedDataSource<Int, Data
                     if (response.isSuccessful) {
                         val apiResponse = response.body()
                         if (apiResponse != null) {
-//                        adapter.models = responseBody.results
                             val responseItems = apiResponse.results
 
                             val key = if (params.key > 1) params.key - 1 else 0
