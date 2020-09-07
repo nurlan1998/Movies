@@ -17,5 +17,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment_container)
         navView.setupWithNavController(navController)
 
+        navView.itemIconTintList = null
+
     }
 }

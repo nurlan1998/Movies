@@ -2,9 +2,10 @@ package com.example.movies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.movies.repository.DetailRepository
 
-class MovieViewModelFactory(var sort_criteria: String) : ViewModelProvider.NewInstanceFactory() {
+class MovieViewModelFactory(private val repository: DetailRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MovieViewModel(sort_criteria) as T
+        return MovieViewModel(repository) as T
     }
 }

@@ -1,32 +1,29 @@
 package com.example.movies.viewmodel
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.example.movies.data.model.DataMoviesResult
-import com.example.movies.datasource.MovieDataSource
-import com.example.movies.datasource.MovieDataSource.Companion.PAGE_SIZE
-import com.example.movies.datasource.MovieDataSourceFactory
+import androidx.lifecycle.viewModelScope
+import com.example.movies.data.model.DataMovies
+import com.example.movies.data.model.DetailMovies
+import com.example.movies.repository.DetailRepository
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class MovieViewModel(var sort_criteria: String) : ViewModel() {
+class MovieViewModel(private val repository: DetailRepository) : ViewModel() {
+    val movieLiveData: MutableLiveData<Response<DetailMovies>> = MutableLiveData()
+    val searchLiveData: MutableLiveData<Response<DataMovies>> = MutableLiveData()
 
-    val moviePagedList: LiveData<PagedList<DataMoviesResult>>
+    fun getDetailMovie(id: Int) {
+        viewModelScope.launch {
+            val responce = repository.getDetailMovie(id)
+            movieLiveData.value = responce
+        }
+    }
 
-    private val liveDataSource: LiveData<MovieDataSource>
-
-    init {
-        val itemDataSourceFactory = MovieDataSourceFactory(sort_criteria)
-
-        liveDataSource = itemDataSourceFactory.movieLiveDataSource
-
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setPageSize(PAGE_SIZE)
-            .build()
-
-        moviePagedList = LivePagedListBuilder(itemDataSourceFactory, config)
-            .build()
-
+    fun getSearchMovie(query: String) {
+        viewModelScope.launch {
+            val search = repository.getSearchMovie(query)
+            searchLiveData.value = search
+        }
     }
 }

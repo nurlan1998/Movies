@@ -16,12 +16,15 @@ class RetrofitInstance {
             this.addInterceptor(interceptor)
         }.build()
 
-        fun getRetrofitInstance(): Retrofit {
-            return Retrofit.Builder()
+        val retrofit by lazy {
+            Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+        }
+        val api: ApiInterFace by lazy {
+            retrofit.create(ApiInterFace::class.java)
         }
     }
 }
