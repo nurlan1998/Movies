@@ -28,6 +28,8 @@ data class DetailMovies(
     val title: String,
     @SerializedName("video")
     val video: Boolean,
+    @SerializedName("videos")
+    val videos: Videos,
     @SerializedName("vote_average")
     val voteAverage: Double
 )

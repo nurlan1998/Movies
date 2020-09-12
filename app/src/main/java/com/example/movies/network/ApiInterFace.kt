@@ -19,14 +19,15 @@ interface ApiInterFace {
         @Query("page") page: Int
     ): Call<DataMovies>
 
-    @GET("3/movie/{movie_id}")
+    @GET("3/movie/{movie_id}?language=en-US")
     suspend fun getDetailMovies(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String,
+        @Query("append_to_response") append_to_response: String
     ): Response<DetailMovies>
 
-    @GET("3/search/movie?api_key=7d6c3c25fa66a886b27c1c4437b07c16&language=en-US&page=1&include_adult=false")
+    @GET("3/search/movie")
     suspend fun getSearchMovies(
         @Query("query") query: String,
         @Query("api_key") apiKey: String,

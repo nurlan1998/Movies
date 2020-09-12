@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.movies.R
+import com.example.movies.adapter.TrailerAdapter
 import com.example.movies.data.model.DetailMovies
 import com.example.movies.repository.DetailRepository
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
@@ -19,11 +20,14 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MovieViewModel
+    var trailerAdapter = TrailerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         val id = intent.getIntExtra(MOVIE_ID, 0)
+
+        rvTrailer.adapter = trailerAdapter
 
         val repository = DetailRepository()
         val viewModelFactory = MovieViewModelFactory(repository)
@@ -31,8 +35,12 @@ class DetailActivity : AppCompatActivity() {
         viewModel.getDetailMovie(id)
         viewModel.movieLiveData.observe(this, Observer {
             if (it.isSuccessful) {
-                Log.i("responce", it.body()?.title.toString())
                 showDetail(it)
+                Log.i("Responce", it.body()?.videos?.results.toString())
+                var trailers = it.body()?.videos?.results
+                if (trailers != null) {
+                    trailerAdapter.trailers = trailers
+                }
             }
         })
     }
