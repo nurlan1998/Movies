@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.example.movies.data.model.DataMovies
 import com.example.movies.data.model.DataMoviesResult
-import com.example.movies.network.ApiInterFace
 import com.example.movies.network.RetrofitInstance
 import com.example.movies.utils.Constants.Companion.API_KEY
 import com.example.movies.utils.Constants.Companion.LANGUAGE

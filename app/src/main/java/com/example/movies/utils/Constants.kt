@@ -10,5 +10,6 @@ class Constants {
         const val SORT_CRITERIA_TOP = "top_rated"
         const val SORT_CRITERIA_UPCOMING = "upcoming"
         const val MOVIE_ID = "id"
+        const val VIDEOS = "videos"
     }
 }
