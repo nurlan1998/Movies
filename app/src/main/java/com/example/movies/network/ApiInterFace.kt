@@ -19,7 +19,7 @@ interface ApiInterFace {
         @Query("page") page: Int
     ): Call<DataMovies>
 
-    @GET("3/movie/{movie_id}?language=en-US")
+    @GET("3/movie/{movie_id}")
     suspend fun getDetailMovies(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String,

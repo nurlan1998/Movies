@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.data.model.VideosResult
+import com.example.movies.utils.Constants.Companion.VIDEO_URL
 import kotlinx.android.synthetic.main.trailer_item.view.*
 
 class TrailerAdapter : RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder>() {
@@ -33,7 +34,7 @@ class TrailerAdapter : RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder>() 
         fun populate(trailer: VideosResult) {
             itemView.title.text = trailer.name
             itemView.setOnClickListener {
-                val url = Uri.parse("https://www.youtube.com/watch?v=${trailer.key}")
+                val url = Uri.parse(VIDEO_URL + "${trailer.key}")
                 itemView.context.startActivity(Intent(Intent.ACTION_VIEW, url))
             }
         }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.data.model.DataMoviesResult
-import com.example.movies.utils.Constants
+import com.example.movies.utils.Constants.Companion.IMAGE_URL
 import kotlinx.android.synthetic.main.search_item.view.*
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
@@ -37,7 +37,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populate(dataMoviesResult: DataMoviesResult) {
             itemView.tvSearchTitle.text = dataMoviesResult.title
-            Glide.with(itemView.context).load(Constants.POSTER_PATH + dataMoviesResult.posterPath)
+            Glide.with(itemView.context)
+                .load(IMAGE_URL + dataMoviesResult.posterPath)
+                .centerCrop()
                 .into(itemView.ivSearchMovie)
 
             itemView.setOnClickListener {

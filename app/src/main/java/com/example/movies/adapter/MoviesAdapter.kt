@@ -8,9 +8,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.movies.R
 import com.example.movies.data.model.DataMoviesResult
+import com.example.movies.utils.Constants.Companion.IMAGE_URL
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MoviesAdapter : PagedListAdapter<DataMoviesResult, MoviesAdapter.HomeViewHolder>(
@@ -33,9 +33,8 @@ class MoviesAdapter : PagedListAdapter<DataMoviesResult, MoviesAdapter.HomeViewH
         fun populate(dataMovie: DataMoviesResult) {
             itemView.tvTitle.text = dataMovie.title
 
-            Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/original${dataMovie.posterPath}")
-                .transform(CenterCrop())
+            Glide.with(itemView.context)
+                .load(IMAGE_URL + dataMovie.posterPath)
                 .into(itemView.ivMovie)
             itemView.setOnClickListener {
                 onItemClickCallBack?.onItemClicked(dataMovie.id)

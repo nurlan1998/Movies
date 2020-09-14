@@ -29,6 +29,8 @@
             <!-- Title, secondary and supporting text -->
             <TextView
                 android:id="@+id/tvSearchTitle"
+                android:textSize="15sp"
+                android:lines="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline6" />

@@ -11,7 +11,7 @@ import com.example.movies.adapter.TrailerAdapter
 import com.example.movies.data.model.DetailMovies
 import com.example.movies.repository.DetailRepository
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
-import com.example.movies.utils.Constants.Companion.POSTER_PATH
+import com.example.movies.utils.Constants.Companion.IMAGE_URL
 import com.example.movies.viewmodel.MovieViewModel
 import com.example.movies.viewmodel.MovieViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -50,7 +50,8 @@ class DetailActivity : AppCompatActivity() {
         tvReleaseDate.text = detail.body()?.releaseDate
         tvDetailOverView.text = detail.body()?.overview
 
-        Glide.with(this).load(POSTER_PATH + detail.body()?.posterPath)
+        Glide.with(this).load(IMAGE_URL + detail.body()?.posterPath)
+            .centerCrop()
             .into(ivDetailMovie)
     }
 }
