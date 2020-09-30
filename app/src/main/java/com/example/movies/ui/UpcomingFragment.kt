@@ -20,11 +20,13 @@ import kotlinx.android.synthetic.main.fragment_upcoming.*
 
 class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
 
-    private val adapter = MoviesAdapter()
+    lateinit var adapter: MoviesAdapter
     private var sort_criteria = SORT_CRITERIA_UPCOMING
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
 
         adapter.setOnItemClickCallBack(object : MoviesAdapter.OnItemClickCallBack {
             override fun onItemClicked(id: Int?) {
@@ -34,7 +36,17 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
             }
         })
 
+        val itemViewModel = ViewModelProviders.of(this, PagingViewModelFactory(sort_criteria))
+            .get(PagingViewModel::class.java)
+        itemViewModel.moviePagedList.observe(requireActivity(), Observer {
+            adapter.submitList(it)
+        })
+    }
+
+    private fun setupRecyclerView() {
+        adapter = MoviesAdapter()
         rvUpcoming.adapter = adapter
+
         if(activity?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
             rvUpcoming.layoutManager = GridLayoutManager(requireContext(),3)
             rvUpcoming.addItemDecoration(GridSpacingItemDecoration(3,0,false))
@@ -42,11 +54,5 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
             rvUpcoming.layoutManager = GridLayoutManager(requireContext(),3)
             rvUpcoming.addItemDecoration(GridSpacingItemDecoration(3,10,true))
         }
-
-        val itemViewModel = ViewModelProviders.of(this, PagingViewModelFactory(sort_criteria))
-            .get(PagingViewModel::class.java)
-        itemViewModel.moviePagedList.observe(requireActivity(), Observer {
-            adapter.submitList(it)
-        })
     }
 }

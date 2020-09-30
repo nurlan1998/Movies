@@ -20,11 +20,13 @@ import kotlinx.android.synthetic.main.fragment_popular.*
 
 class PopularFragment : Fragment(R.layout.fragment_popular) {
 
-    private val adapter = MoviesAdapter()
+    lateinit var adapter: MoviesAdapter
     private var sort_criteria = SORT_CRITERIA_POP
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
 
         adapter.setOnItemClickCallBack(object : MoviesAdapter.OnItemClickCallBack {
             override fun onItemClicked(id: Int?) {
@@ -34,7 +36,17 @@ class PopularFragment : Fragment(R.layout.fragment_popular) {
             }
         })
 
+        val itemViewModel = ViewModelProviders.of(this, PagingViewModelFactory(sort_criteria))
+            .get(PagingViewModel::class.java)
+        itemViewModel.moviePagedList.observe(requireActivity(), Observer {
+            adapter.submitList(it)
+        })
+    }
+
+    private fun setupRecyclerView(){
+        adapter = MoviesAdapter()
         rvPopular.adapter = adapter
+
         if (activity?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
             rvPopular.layoutManager = GridLayoutManager(requireContext(), 3)
             rvPopular.addItemDecoration(GridSpacingItemDecoration(3, 0, false))
@@ -42,11 +54,5 @@ class PopularFragment : Fragment(R.layout.fragment_popular) {
             rvPopular.layoutManager = GridLayoutManager(requireContext(), 3)
             rvPopular.addItemDecoration(GridSpacingItemDecoration(3, 10, false))
         }
-
-        val itemViewModel = ViewModelProviders.of(this, PagingViewModelFactory(sort_criteria))
-            .get(PagingViewModel::class.java)
-        itemViewModel.moviePagedList.observe(requireActivity(), Observer {
-            adapter.submitList(it)
-        })
     }
 }
