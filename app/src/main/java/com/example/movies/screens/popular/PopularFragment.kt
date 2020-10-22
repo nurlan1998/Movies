@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
 import com.example.movies.utils.GridSpacingItemDecoration
 import com.example.movies.adapter.MoviesPagingAdapter
-import com.example.movies.screens.detail.DetailActivity
+import com.example.movies.screens.home.HomeFragment
+import com.example.movies.screens.upcoming.UpcomingViewModel
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
 import com.example.movies.utils.Constants.Companion.SORT_CRITERIA_POP
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,9 +32,8 @@ class PopularFragment : Fragment(R.layout.fragment_popular) {
 
         adapter.setOnItemClickCallBack(object : MoviesPagingAdapter.OnItemClickCallBack {
             override fun onItemClicked(id: Int?) {
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                intent.putExtra(MOVIE_ID, id)
-                startActivity(intent)
+                val mAction = id?.let { PopularFragmentDirections.actionPopularFragmentToDetailFragment2(it) }
+                findNavController().navigate(mAction!!)
             }
         })
 

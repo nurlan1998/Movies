@@ -7,13 +7,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
 import com.example.movies.utils.GridSpacingItemDecoration
 import com.example.movies.adapter.MoviesPagingAdapter
-import com.example.movies.screens.detail.DetailActivity
+import com.example.movies.screens.home.HomeFragment
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
-import com.example.movies.utils.Constants.Companion.SORT_CRITERIA_TOP
 import com.example.movies.utils.Constants.Companion.SORT_CRITERIA_UPCOMING
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_upcoming.*
@@ -31,9 +31,8 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
 
         adapter.setOnItemClickCallBack(object : MoviesPagingAdapter.OnItemClickCallBack {
             override fun onItemClicked(id: Int?) {
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                intent.putExtra(MOVIE_ID, id)
-                startActivity(intent)
+                val mAction = UpcomingFragmentDirections.actionTopRatedFragmentToDetailFragment2(id!!)
+                findNavController().navigate(mAction!!)
             }
         })
 

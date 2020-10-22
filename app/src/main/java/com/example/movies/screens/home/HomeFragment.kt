@@ -1,17 +1,18 @@
 package com.example.movies.screens.home
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
 import com.example.movies.utils.GridSpacingItemDecoration
 import com.example.movies.adapter.MoviesPagingAdapter
-import com.example.movies.screens.detail.DetailActivity
+import com.example.movies.screens.detail.DetailFragment
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
 import com.example.movies.utils.Constants.Companion.SORT_CRITERIA_TOP
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,9 +36,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         adapter.setOnItemClickCallBack(object : MoviesPagingAdapter.OnItemClickCallBack {
             override fun onItemClicked(id: Int?) {
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                intent.putExtra(MOVIE_ID, id)
-                startActivity(intent)
+
+                val action = id?.let {
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment2(it) }
+                findNavController().navigate(action!!)
             }
         })
     }

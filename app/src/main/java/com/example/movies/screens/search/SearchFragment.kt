@@ -9,10 +9,11 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
+import com.example.movies.screens.home.HomeFragment
 import com.example.movies.utils.GridSpacingItemDecoration
-import com.example.movies.screens.detail.DetailActivity
 import com.example.movies.utils.Constants.Companion.MOVIE_ID
 import com.example.movies.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,9 +31,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         setupRecyclerView()
 
         searchAdapter.setOnItemClickListener {
-            var intent = Intent(requireContext(), DetailActivity::class.java)
-            intent.putExtra(MOVIE_ID, it)
-            startActivity(intent)
+            val mAction = SearchFragmentDirections.actionSearchFragmentToDetailFragment2(it)
+            findNavController().navigate(mAction)
         }
 
         etSearch.addTextChangedListener {
