@@ -4,7 +4,7 @@
 - полностью написано на Котлине
 - использует MVVM-Pattern
 - реализует инъекцию зависимостей с помощью dagger2
-- Android Jetpack (ViewModel, LiveData, жизненный цикл)
+- Android Jetpack (ViewModel, LiveData, Lifecycle)
 - использует Retrofit и Coroutine для сетевого уровня
 
 <img height="500" src="https://github.com/nurlan1998/Movies/blob/master/app/src/main/assets/movies_screenshot_1.jpg" />
