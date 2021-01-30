@@ -3,7 +3,7 @@
 
 - полностью написано на Котлине
 - использует MVVM-Pattern
-- реализует инъекцию зависимостей с помощью dagger2
+- реализует инъекцию зависимостей с помощью Dagger hilt
 - Android Jetpack (ViewModel, LiveData, Lifecycle)
 - использует Retrofit и Coroutine для сетевого уровня
 
